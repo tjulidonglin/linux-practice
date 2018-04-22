@@ -18,7 +18,7 @@ CC       = gcc -Wall
 CFLAGS   = -g -O2 -fomit-frame-pointer -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64
 LDFLAGS  = 
 
-BIN	= atexit-1 atexit-2 env-1 env-2
+BIN	= strncat atexit-1 atexit-2 env-1 env-2
 
 sbindir = /usr/sbin
 
