@@ -4,7 +4,7 @@
 
 void kmain(void)
 {
-    char *str = "fuck your ass!";
+    char *str = "Hello world!";
     char *vidptr = (char*)0xb8000;
     unsigned int i = 0;
     unsigned int j = 0;
