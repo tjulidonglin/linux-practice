@@ -16,9 +16,10 @@
 
 CC       = gcc -Wall
 CFLAGS   = -g -O2 -fomit-frame-pointer -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64
-LDFLAGS  = 
+CFLAGS   += -I /usr/include/glib-2.0 -I /usr/lib/x86_64-linux-gnu/glib-2.0/include/ 
+LDFLAGS  =  -lglib-2.0 -L /lib/x86_64-linux-gnu/
 
-BIN	= fork getid setjmp fgets strncat atexit-1 atexit-2 env-1 env-2
+BIN	= main
 
 sbindir = /usr/sbin
 
