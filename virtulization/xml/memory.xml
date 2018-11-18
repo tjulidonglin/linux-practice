@@ -1,0 +1,6 @@
+  <memory model='dimm' access='private'>
+    <target>
+      <size unit='GiB'>1</size>
+      <node>0</node>
+    </target>
+  </memory>

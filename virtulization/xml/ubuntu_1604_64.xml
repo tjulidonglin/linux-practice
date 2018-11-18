@@ -1,0 +1,224 @@
+<domain type='kvm'>
+  <name>ubuntu_1604_64</name>
+  <maxMemory slots='6' unit='GiB'>8</maxMemory>
+  <memory>4194304</memory>
+  <currentMemory>4194304</currentMemory>
+  <memoryBacking>
+    <hugepages>
+      <page size='2048' unit='KiB' nodeset='0'/>
+    </hugepages>
+  </memoryBacking>
+  <memtune>
+    <hard_limit unit='GiB'>4</hard_limit>
+    <!--min_guarantee unit='GiB'>2</min_guarantee-->
+    <shares>1024</shares>
+  </memtune>
+  <vcpu placement='static' cpuset='1-4,6' current='4'>4</vcpu>
+  <vcpus>
+    <vcpu id='0' enabled='yes' hotpluggalbe='yes'/>
+    <vcpu id='1' enabled='yes' hotpluggalbe='yes'/>
+    <vcpu id='2' enabled='yes' hotpluggalbe='yes'/>
+    <vcpu id='3' enabled='yes' hotpluggalbe='yes'/>
+  </vcpus>
+  <cputune>
+    <emulatorpin cpuset='4'/>
+    <shares>2048</shares>
+    <global_quota>-1</global_quota>
+    <min_guarantee unit='MHz'>2094</min_guarantee>
+  </cputune>
+  <cpu mode='custom' match='exact'>
+    <model fallback='allow'>Westmere</model>
+    <topology sockets='1' cores='2' threads='2'/>
+    <numa>
+      <cell id='0' cpus='0-3' memory='4194304' unit='KiB'/>
+    </numa>
+  </cpu>
+  <iothreads>4</iothreads>
+  <iothreadids>
+    <iothread id='2'/>
+    <iothread id='4'/>
+    <iothread id='6'/>
+  </iothreadids>
+  <os>
+    <type arch='x86_64' machine='pc'>hvm</type>
+    <boot dev='hd'/>
+    <boot dev='cdrom'/>
+    <bootmenu enable='yes' timeout='3000'/>
+    <smbios mode='sysinfo'/>
+  </os>
+  <sysinfo type='smbios'>
+    <bios>
+      <entry name='vendor'>LENOVO</entry>
+    </bios>
+    <system>
+      <entry name='manufacturer'>Lidonglin</entry>
+      <entry name='product'>Virt-Manager</entry>
+      <entry name='version'>0.9.4</entry>
+    </system>
+    <baseBoard>
+      <entry name='manufacturer'>LENOVO</entry>
+      <entry name='product'>20BE0061MC</entry>
+      <entry name='version'>0B98401 Pro</entry>
+      <entry name='serial'>W1KS427111E</entry>
+    </baseBoard>
+    <chassis>
+      <entry name='manufacturer'>Dell Inc.</entry>
+      <entry name='version'>2.12</entry>
+      <entry name='serial'>65X0XF2</entry>
+      <entry name='asset'>40000101</entry>
+      <entry name='sku'>Type3Sku1</entry>
+    </chassis>
+    <oemStrings>
+      <entry>myappname:some arbitrary data</entry>
+      <entry>otherappname:more arbitrary data</entry>
+    </oemStrings>
+  </sysinfo>
+  <features>
+    <acpi/>
+    <apic/>
+    <pae/>
+  </features>
+  <clock offset='localtime'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>   
+  <on_crash>destroy</on_crash>
+  <devices>
+    <emulator>/usr/bin/qemu-system-x86_64</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+	  <source file='/root/images/ubuntu_1604_64.qcow2'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <disk type='file' device='cdrom'>
+		<source file='/root/iso/CentOS-7-x86_64-Everything-1511.iso' startupPolicy='optional'/>
+      <target dev='hdd' bus='ide'/>
+    </disk>
+    <interface type='bridge'>
+      <source bridge='br0'/>
+      <mac address="00:17:3e:5d:ab:a8"/>
+      <virtualport type='openvswitch'>
+      </virtualport>
+	  <vlan>
+		  <tag id='1'/>
+	  </vlan>
+      <model type='virtio'/>
+      <alias name='net0'/>
+      <target dev='tap0'/>
+      <driver name='vhost' txmode='iothread' ioeventfd='on' event_idx='off' queues='5' rx_queue_size='256' tx_queue_size='256'>
+        <host csum='off' gso='off' tso4='off' tso6='off' ecn='off' ufo='off' mrg_rxbuf='off'/>
+        <guest csum='off' tso4='off' tso6='off' ecn='off' ufo='off'/>
+      </driver>
+	  <rom bar='on' enabled='no'/>
+    </interface>
+    <interface type='bridge'>
+      <source bridge='br0'/>
+      <mac address="00:17:3e:5d:aa:a8"/>
+      <virtualport type='openvswitch'>
+      </virtualport>
+	  <vlan>
+		  <tag id='2'/>
+	  </vlan>
+      <model type='virtio'/>
+      <alias name='net1'/>
+      <target dev='tap1'/>
+      <driver name='vhost' txmode='iothread' ioeventfd='on' event_idx='off' queues='5' rx_queue_size='256' tx_queue_size='256'>
+        <host csum='off' gso='off' tso4='off' tso6='off' ecn='off' ufo='off' mrg_rxbuf='off'/>
+        <guest csum='off' tso4='off' tso6='off' ecn='off' ufo='off'/>
+      </driver>
+    </interface>
+    <!--interface type='network'>
+      <source network='default'/>
+      <mac address="00:16:3e:5d:aa:a8"/>
+      <model type='virtio'/>
+    </interface-->
+    <input type='mouse' bus='usb'/>
+    <input type='keyboard' bus='usb'/>
+    <input type='tablet' bus='usb'/>
+    <graphics type='vnc' port='-1' autoport='yes' listen = '0.0.0.0' keymap='en-us'/>
+    <video>
+      <model type='vga' vram='16384' heads='1'/>
+    </video>
+    <sound model='ac97'>
+    </sound>
+    <serial type='pty'>
+    </serial>
+    <serial type='file'>
+      <source path='/var/log/libvirt/qemu/centos_72_serial.log'/>
+    </serial>
+	<controller type='virtio-serial' index='0'/>
+	<controller type='virtio-serial' index='1'/>
+	<controller type='virtio-serial' index='2'/>
+    <controller type='usb' model='ehci'>
+    </controller>
+    <controller type='usb' model='nec-xhci'>
+    </controller>
+    <controller type='pci' index='1' model='pci-bridge'>
+      <model name='pci-bridge'/>
+      <target chassisNr='1'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+    </controller>
+    <controller type='pci' index='2' model='pci-bridge'>
+      <model name='pci-bridge'/>
+      <target chassisNr='1'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+    </controller>
+    <hostdev mode='subsystem' type='usb'>
+      <source startupPolicy='optional'>
+        <vendor id='0x17ef'/>
+        <product id='0x3852'/>
+      </source>
+    </hostdev>
+    <hostdev mode='subsystem' type='usb'>
+      <source startupPolicy='optional'>
+        <vendor id='0x079b'/>
+        <product id='0x0062'/>
+      </source>
+    </hostdev>
+    <!--hostdev model='subsystem' type='pci' managed='yes'>
+      <driver name='vfio'/>
+      <source>
+        <address domain='0x0000' bus='0x00' slot='1b' function='0x0'/>
+      </source>
+    </hostdev-->
+    <watchdog model='i6300esb' action='pause'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x1b' function='0x0'/>
+    </watchdog>
+    <channel type='pty'>
+      <target type='virtio' name='mychannel'/>
+	  <address type='virtio-serial' controller='2' bus='0' port='12'/>
+    </channel>
+    <channel type='unix'>
+      <source mode='bind' path='/var/lib/libvirt/qemu/centos72.agent'/>
+      <target type='virtio' name='org.qemu.guest_agent.0' port='30'/>
+    </channel>
+    <channel type='unix'>
+      <source mode='bind' path='/var/lib/libvirt/qemu/centos72-2.agent'/>
+      <target type='virtio' name='org.qemu.guest_agent.1' port='29'/>
+    </channel>
+    <!--shmem name='my_shmem0'>
+      <model type='ivshmem-doorbell'/>
+      <size unit='M'>4</size>
+    </shmem-->
+    <!--memory model='dimm' access='private'>
+      <target>
+        <size unit='KiB'>524287</size>
+        <node>0</node>
+      </target>
+    </memory-->
+    <!--iommu model='intel'>
+      <driver intremap='on'/>
+      <driver caching_mode='on'/>
+      <driver eim='on'/>
+      <driver iotlb='on'/>
+    </iommu-->
+    <filesystem type='mount' accessmode='passthrough'>
+      <source dir='/root'/>
+	  <target dir='test_mount'/> 
+	</filesystem>
+    <seclabel type='none'/>
+    <qemu:commandline>
+      <qemu:arg value='-device'/>
+      <qemu:arg value='isa-ipmi,chardev=mychar,iobase=0x0ca2,start_time=300,wdt_reboot=300,reboot_enable=false'/>
+    </qemu:commandline>
+  </devices>
+</domain>
