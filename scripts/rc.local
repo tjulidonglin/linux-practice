@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Start virtulization service!"
+/usr/sbin/libvirtd -d -l
+/usr/sbin/virtlogd -d
+echo "Start virtulization service successfully!"
+
+echo "Setup shadowsocks"
+nohup /usr/local/bin/sslocal -c /etc/shadowsocks.json &
+echo "Setup shadowsocks successfully!"

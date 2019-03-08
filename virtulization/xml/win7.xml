@@ -1,0 +1,150 @@
+<domain type='kvm'>
+  <name>windows7_64</name>
+	<uuid>7e536428-6a61-4413-8be9-98de4c14c5e5</uuid>
+    <maxMemory slots='64' unit='GiB' >16</maxMemory>
+    <memory unit='GiB'>8</memory>
+    <currentMemory unit='GiB'>8</currentMemory>
+    <!--memoryBacking>
+      <hugepages>
+	   <page size='2048' unit='KiB' nodeset='0'/>
+      </hugepages>
+    </memoryBacking-->
+    <vcpu placement='static' current='8'>8</vcpu>
+    <cputune>
+	  <emulatorpin cpuset='2'/>
+    </cputune>
+    <cpu mode='host-passthrough' match='strict'>
+      <!--cache mode='host-passthrough'/-->
+      <topology sockets='2' cores='4' threads='1'/>
+      <numa>
+        <cell id='0' cpus='0-3' memory='4' unit='GiB'/>
+        <cell id='1' cpus='4-7' memory='4' unit='GiB'/>
+      </numa>
+    </cpu>
+    <os>
+      <type arch='x86_64' machine='pc'>hvm</type>
+      <boot dev='hd'/>
+      <boot dev='cdrom'/>
+      <smbios mode='sysinfo'/>
+    </os>
+    <sysinfo type='smbios'>
+      <bios>
+        <entry name='vendor'>Huawei</entry>
+      </bios>
+      <system>
+        <entry name='manufacturer'>Ubuntu</entry>
+        <entry name='product'>Virt-Manager</entry>
+        <entry name='version'>0.9.4</entry>
+      </system>
+      <baseBoard>
+        <entry name='manufacturer'>Huawei</entry>
+        <entry name='product'>20BE0061MC</entry>
+        <entry name='version'>0B98401 Pro</entry>
+        <entry name='serial'>W1KS427111E</entry>
+      </baseBoard>
+      <chassis>
+        <entry name='manufacturer'>Dell Inc.</entry>
+        <entry name='version'>2.12</entry>
+        <entry name='serial'>65X0XF2</entry>
+        <entry name='asset'>40000101</entry>
+        <entry name='sku'>Type3Sku1</entry>
+      </chassis>
+      <oemStrings>
+        <entry>Li Donglin's Linux Server</entry>
+        <entry>otherappname:more arbitrary data</entry>
+      </oemStrings>
+    </sysinfo>
+  <features>
+    <acpi/>
+    <apic/>
+    <pae/>
+  </features>
+  <pm>
+   <suspend-to-disk enabled='no'/>
+   <suspend-to-ram enabled='no'/>
+  </pm>
+  <clock offset='localtime'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>   
+  <on_crash>destroy</on_crash>
+  <devices>
+    <!--emulator>/root/code/qemu-upstream/x86_64-softmmu/qemu-system-x86_64</emulator-->
+    <emulator>/usr/bin/qemu-system-x86_64</emulator>
+    <disk type='file' device='disk'>
+     <driver name='qemu' type='qcow2'/>
+     <source file='/root/images/win7_pro_sp1_64.qcow2'/>
+     <target dev='sda' bus='ide'/>
+    </disk>
+    <!--disk type='block' device='disk'>
+     <driver name='qemu' type='raw'/>
+     <source dev='/dev/sda'/>
+     <target dev='sdb' bus='virtio'/>
+    </disk>
+    <disk type='block' device='disk'>
+     <driver name='qemu' type='raw'/>
+     <source dev='/dev/sdc'/>
+     <target dev='sdc' bus='virtio'/>
+    </disk-->
+    <!-->
+    <disk type='block' device='disk'>
+     <driver name='qemu' type='raw'/>
+     <source dev='/dev/sdd'/>
+     <target dev='sde' bus='virtio'/>
+    </disk>
+    <-->
+    <disk type='file' device='cdrom'>
+      <!--source file='/root/xml/virtio-win.iso'/-->
+      <source file='/root/iso/cn_windows_7_professional_x64_dvd_x15-65791.iso' startupPolicy='optional'/>
+      <target dev='hdd' bus='ide'/>
+    </disk>
+    <interface type='bridge'>
+      <source bridge='br0'/>
+      <virtualport type='openvswitch'>
+      </virtualport>
+      <target dev='tap0'/>
+      <alias name='net0'/>
+      <mac address="00:16:3e:5d:aa:a8"/>
+      <model type='virtio'/>
+      <driver name='vhost' queues='8'/>
+    </interface>
+    <input type='tablet' bus='usb'/>
+    <controller type='usb' model='ehci'/>
+    <controller type='usb' model='nec-xhci'/>
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <graphics type='vnc' autoport='yes' listen = '0.0.0.0' keymap='en-us' sharPolicy='allow-exclusive'/>
+    <video>
+      <model type='vga' vram='16384' heads='1'/>
+    </video>
+    <sound model='ac97'/>
+    <hostdev mode='subsystem' type='usb'>
+      <source startupPolicy='optional'>
+        <vendor id='0x079b'/>
+        <product id='0x0062'/>
+      </source>
+    </hostdev>
+    <hostdev mode='subsystem' type='usb'>
+      <source startupPolicy='optional'>
+        <vendor id='0x067b'/>
+        <product id='0x2733'/>
+      </source>
+    </hostdev>
+    <hostdev mode='subsystem' type='usb'>
+      <source startupPolicy='optional'>
+        <vendor id='0x1058'/>
+        <product id='0x0820'/>
+      </source>
+    </hostdev>
+    <!--hostdev mode='subsystem' type='mdev' model='vfio-pci'>
+        <source>
+          <address uuid='c2177883-f1bb-47f0-914d-32a22e3a8804'/>
+       </source>
+    </hostdev-->
+    <!--hostdev mode='subsystem' type='pci' managed='yes'>
+      <source>
+        <address domain='0x0000' bus='0x04' slot='0x00' function='0x0'/>
+     </source>
+    </hostdev-->
+    <panic model='isa'/>
+  </devices>
+ </domain>

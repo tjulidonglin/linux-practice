@@ -1,0 +1,1 @@
+./configure --enable-kvm --enable-vnc --enable-debug --enable-virtfs --enable-sdl --enable-docs  --enable-libusb --enable-spice --target-list=x86_64-softmmu  --prefix=/usr

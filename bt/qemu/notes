@@ -1,0 +1,19 @@
+/* memory_listener_register */
+#0  0x000055555581bc00 in memory_listener_register (listener=0x555555c72840 <kvm_memory_listener>, filter=0x0) at /root/code/qemu-upstream/memory.c:1485
+#1  0x0000555555813e8c in kvm_init () at /root/code/qemu-upstream/kvm-all.c:1404
+#2  0x000055555571df25 in configure_accelerator () at /root/code/qemu-upstream/vl.c:2230
+#3  0x00005555557210a7 in main (argc=21, argv=0x7fffffffe2b8, envp=0x7fffffffe368) at /root/code/qemu-upstream/vl.c:3459
+
+
+#0  0x000055555581bc00 in memory_listener_register (listener=0x555555c69e40 <core_memory_listener>, filter=0x55555652aac0) at /root/code/qemu-upstream/memory.c:1485
+#1  0x00005555557b6caa in memory_map_init () at /root/code/qemu-upstream/exec.c:3362
+#2  0x00005555557b14af in cpu_exec_init_all () at /root/code/qemu-upstream/exec.c:636
+#3  0x000055555572135a in main (argc=21, argv=0x7fffffffe2b8, envp=0x7fffffffe368) at /root/code/qemu-upstream/vl.c:3531
+
+#0  0x000055555581bc00 in memory_listener_register (listener=0x555555c69ec0 <io_memory_listener>, filter=0x55555652ab80) at /root/code/qemu-upstream/memory.c:1485
+#1  0x00005555557b6cc0 in memory_map_init () at /root/code/qemu-upstream/exec.c:3363
+#2  0x00005555557b14af in cpu_exec_init_all () at /root/code/qemu-upstream/exec.c:636
+#3  0x000055555572135a in main (argc=21, argv=0x7fffffffe2b8, envp=0x7fffffffe368) at /root/code/qemu-upstream/vl.c:3531
+
+
+
