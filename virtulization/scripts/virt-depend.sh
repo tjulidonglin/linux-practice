@@ -22,4 +22,12 @@ fn_config_qemu()
     ./configure --enable-kvm --enable-vnc --enable-debug --enable-sdl --enable-docs --enable-libusb --disable-xen --disable-spice --target-list=x86_64-softmmu
 }
 
+fn_systemenv_dependence()
+{
+	apt update
+	apt install -y tree exuberant-ctags
+}
 
+fn_systemenv_dependence
+fn_libvirt_dependence
+fn_linux_dependence
