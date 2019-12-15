@@ -1,0 +1,21 @@
+# NB we don't use socket activation. When libvirtd starts it will
+# spawn any virtual machines registered for autostart. We want this
+# to occur on every boot, regardless of whether any client connects
+# to a socket. Thus socket activation doesn't have any benefit
+
+[Unit]
+Description=Shadowsocks daemon
+Wants=systemd-machined.service
+Documentation=http://118.25.60.17/shadowsocks.deb
+
+[Service]
+Type=notify
+EnvironmentFile=-/etc/shadowsocks.json
+ExecStart=/usr/local/bin/ssserver -c /etc/shadowsocks.json -d start
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/usr/bin/pkill ssserver
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

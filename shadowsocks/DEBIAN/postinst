@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#ssserver -c /etc/shadowsocks.json -d start&
+ln -s /lib/systemd/system/ssserver.service /etc/systemd/system/ssserver.service
+systemctl enable ssserver.service
+systemctl start ssserver.service
+

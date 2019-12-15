@@ -1,0 +1,6 @@
+#!/bin/bash
+
+rm -rf /etc/shadowsocks.json
+systemctl disable ssserver.service
+systemctl stop ssserver.service
+exit 0

@@ -1,0 +1,8 @@
+Package: shadowsocks
+Version: 0.1
+Section: free
+Priority: optional
+Architecture: amd64
+Depends: pip
+Maintainer: LiDonglin <tjulidonglin@live.cn>
+Description: confiure shadowsocks VPN environment
