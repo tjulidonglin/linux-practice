@@ -29,17 +29,17 @@ static ssize_t globalmem_read(struct file *filp, char __user *buf, size_t size, 
 
     if (p >= GLOBALMEM_SIZE)
         return 0;
- 
+
     if (count > GLOBALMEM_SIZE - p)
         count = GLOBALMEM_SIZE - p;
 
-    if (copy_to_user(buf, dev->mem + p, count))
+    if (copy_to_user(buf, dev->mem + p, count)) {
         ret = -EFAULT;
-    else {
+	} else {
         *ppos += count;
-	ret = count;
+	    ret = count;
     }
-	
+
     return ret;
 }
 
@@ -52,17 +52,17 @@ static ssize_t globalmem_write(struct file *filp, const char __user *buf, size_t
 
     if (p >= GLOBALMEM_SIZE)
         return 0;
- 
+
     if (count > GLOBALMEM_SIZE - p)
         count = GLOBALMEM_SIZE - p;
 
-    if (copy_from_user(dev->mem + p, buf, count))
+    if (copy_from_user(dev->mem + p, buf, count)) {
         ret = -EFAULT;
-    else {
+    } else {
         *ppos += count;
-	ret = count;
+	    ret = count;
     }
-	
+
     return ret;
 }
 
@@ -72,25 +72,26 @@ static loff_t globalmem_llseek(struct file *filp, loff_t offset, int orig)
 
     switch(orig) {
     case SEEK_SET:
-	if (offset < 0 || offset > GLOBALMEM_SIZE) {
-            ret = -EINVAL;
+	    if (offset < 0 || offset > GLOBALMEM_SIZE) {
+	        ret = -EINVAL;
+	        break;
+		}
+	    filp->f_pos = offset;
+	    ret = filp->f_pos;
 	    break;
-	}
-	filp->f_pos = offset;
-	ret = filp->f_pos;
-	break;
     case SEEK_CUR:
-	if (filp->f_pos + offset > GLOBALMEM_SIZE || filp->f_pos + offset < 0) {
+	    if (filp->f_pos + offset > GLOBALMEM_SIZE || filp->f_pos + offset < 0) {
             ret = -EINVAL;
+	        break;
+	    }
+	    filp->f_pos += offset;
+	    ret = filp->f_pos;
 	    break;
-	}
-	filp->f_pos += offset;
-	ret = filp->f_pos;
-	break;
     default:
-	ret = -EINVAL;
-	break;
+	    ret = -EINVAL;
+    	break;
     }
+
     return ret;
 }
 
@@ -98,6 +99,7 @@ static int globalmem_open(struct inode *inode, struct file *filp)
 {
     globalmem_dev *dev = container_of(inode->i_cdev, globalmem_dev, cdev);
     filp->private_data = dev;
+
     return 0;
 }
 
@@ -111,7 +113,7 @@ struct file_operations globalmem_fops = {
     .llseek = globalmem_llseek,
     .open = globalmem_open,
     .release = globalmem_release,
-//  .unlocked_ioctl = globalmem_ioctl,
+    //.unlocked_ioctl = globalmem_ioctl,
     .read = globalmem_read,
     .write = globalmem_write,
 };
@@ -136,11 +138,11 @@ static int __init globalmem_init(void)
     int i = 0;
     dev_t devno = MKDEV(globalmem_major, 0);
 
-    if (globalmem_major) // static register
+    if (globalmem_major) { // static register
         ret = register_chrdev_region(devno, DEVICE_NUM, "globalmem");
-    else {
+    } else {
         ret = alloc_chrdev_region(&devno, 0, DEVICE_NUM, "globalmem");
-	globalmem_major = MAJOR(devno);
+	    globalmem_major = MAJOR(devno);
     }
     if (ret < 0) {
         printk(KERN_ERR "allocate device number failed\n");
