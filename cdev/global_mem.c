@@ -108,12 +108,32 @@ static int globalmem_release(struct inode *inode, struct file *filp)
     return 0;
 }
 
+static long globalmem_ioctl(struct file *filp, unsigned int cmd,
+		unsigned long arg)
+{
+	globalmem_dev *dev = filp->private_data;
+
+	switch(cmd) {
+	case MEM_CLEAR:
+		//mutex_lock(&dev->mutex);
+		memset(dev->mem, 0, GLOBALMEM_SIZE);
+		//mutex_unlock(&dev->mutex);
+
+		printk(KERN_INFO"globalmem is set to zero\n");
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
 struct file_operations globalmem_fops = {
     .owner = THIS_MODULE,
     .llseek = globalmem_llseek,
     .open = globalmem_open,
     .release = globalmem_release,
-    //.unlocked_ioctl = globalmem_ioctl,
+    .unlocked_ioctl = globalmem_ioctl,
     .read = globalmem_read,
     .write = globalmem_write,
 };
