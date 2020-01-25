@@ -1,0 +1,4 @@
+1. ubuntu更新grub文件
+  update-grub
+2. centos更新grub文件
+  grub2-mkconfig -o /boot/grub2/grub.cfg
