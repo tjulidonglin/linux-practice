@@ -1,0 +1,4 @@
+1. 只下载软件包不安装
+  apt install -d xx
+2. 自制deb本地源
+
