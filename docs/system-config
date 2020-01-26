@@ -2,3 +2,6 @@
   update-grub
 2. centos更新grub文件
   grub2-mkconfig -o /boot/grub2/grub.cfg
+3. 配置网卡采用传统命名
+  grub命令行追加参数: biosdevname=0 net.ifnames=0
+
