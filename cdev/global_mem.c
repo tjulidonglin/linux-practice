@@ -17,6 +17,8 @@ typedef struct globalmem_dev {
     struct cdev cdev;
     unsigned char mem[GLOBALMEM_SIZE];
     struct mutex mutex;
+    wait_queue_head_t r_wait;
+    wait_queue_head_t w_wait;
 } globalmem_dev;
 
 globalmem_dev *globalmem_devp = NULL;
@@ -27,6 +29,10 @@ static ssize_t globalmem_read(struct file *filp, char __user *buf, size_t size, 
     unsigned int count = size;
     int ret = 0;
     globalmem_dev *dev = filp->private_data;
+    DECLARE_WAITQUEUE(wait, current);
+
+    mutex_lock(&dev->mutex);
+    add_wait_queue(&dev->r_wait, &wait);
 
     if (p >= GLOBALMEM_SIZE)
         return 0;
@@ -34,7 +40,6 @@ static ssize_t globalmem_read(struct file *filp, char __user *buf, size_t size, 
     if (count > GLOBALMEM_SIZE - p)
         count = GLOBALMEM_SIZE - p;
 
-    mutex_lock(&dev->mutex);
     if (copy_to_user(buf, dev->mem + p, count)) {
         ret = -EFAULT;
 	} else {
@@ -180,6 +185,8 @@ static int __init globalmem_init(void)
     }
 
     mutex_init(&globalmem_devp->mutex);
+    init_waitqueue_head(&globalmem_devp->r_wait);
+    init_waitqueue_head(&globalmem_devp->w_wait);
 
     for (i = 0; i < DEVICE_NUM; i++)
         globalmem_setup_cdev(globalmem_devp + i, i);
