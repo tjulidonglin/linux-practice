@@ -4,4 +4,20 @@
   grub2-mkconfig -o /boot/grub2/grub.cfg
 3. 配置网卡采用传统命名
   grub命令行追加参数: biosdevname=0 net.ifnames=0
+4. systemd系统配置使用rc.local脚本
+  ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service
+  根据rc-local.service文件里提到的脚本文件，创建对应的文件，并给文件添加执行权限
+  例如：
+  [Unit]
+    Description=/etc/rc.d/rc.local Compatibility
+    ConditionFileIsExecutable=/etc/rc.d/rc.local
+    After=network.target
+
+  [Service]
+    Type=forking
+    ExecStart=/etc/rc.d/rc.local start //在etc目录下创建对应的rc.local文件，并赋予执行权限
+    TimeoutStartSec=0
+    TimeoutStopSec=30
+    RemainAfterExit=yes
+
 
