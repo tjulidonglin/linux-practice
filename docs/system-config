@@ -19,5 +19,9 @@
     TimeoutStartSec=0
     TimeoutStopSec=30
     RemainAfterExit=yes
-
+5. cscope 查看python代码
+ cscope默认会查找.c,.h,.l,.y代码。对于其他代码，比如python, java则需要事先建立cscope.files, 
+ 然后再执行cscope -Rbqk
+ find ./ -name '*.py' > ./cscope.files
+ cscope -Rbqk
 
