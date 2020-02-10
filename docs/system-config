@@ -24,4 +24,4 @@
  然后再执行cscope -Rbqk
  find ./ -name '*.py' > ./cscope.files
  cscope -Rbqk
-
+6. apt --fix-broken install 
