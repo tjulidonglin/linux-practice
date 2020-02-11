@@ -6,6 +6,9 @@ apt install -y gcc g++ make autopoint pkgconf zlib1g-dev libsdl2-dev libglib2.0-
 # compile libvirt
 apt install -y libncurses5-dev libtool autoconf libxml2-utils xsltproc libxml2-dev libpciaccess-dev libyajl-dev python3-pip libnl-3-dev libnl-route-3-dev libdevmapper-dev
 
+# compile linux
+apt install -y libssl-dev dot2tex dvipng librsvg2-bin python3-sphinx libncurses5-dev
+
 # install ovs
 apt install -y openvswitch-switch
 
