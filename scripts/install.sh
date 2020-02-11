@@ -20,3 +20,6 @@ apt install -y git vim samba openssh-server pkg-config gnutls-bin tree
 
 # ifconfig
 apt install -y net-tools
+
+# cscope
+apt install -y exuberant-ctags cscope
