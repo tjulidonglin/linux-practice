@@ -1,8 +1,0 @@
-{
-	"server":"47.91.209.110",
-	"server_port":8096,
-	"local_port":1080,
-	"password":"Huawei123",
-	"timeout":600,
-	"method":"aes-256-cfb"
-}
