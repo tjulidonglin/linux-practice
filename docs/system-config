@@ -25,3 +25,6 @@
  find ./ -name '*.py' > ./cscope.files
  cscope -Rbqk
 6. apt --fix-broken install 
+7. centos6 32bit系统上执行busybox-1.14.4版本构建时遇到not found lcrytp的错误
+  解决方案：
+  yum install -y glibc-static
