@@ -1,0 +1,4 @@
+1. 统计git提交次数排名
+  git log --pretty="%aN" --since=2020-1-1 | sort | uniq -c | sort -k 1 -n -r | head -n 1
+2. 按照人和时间范围来统计代码量
+  git log --author="tjulidonglin" --since=2018-01-01 --until=2019-12-31 --pretty=tformat: --numstat | awk 'BEGIN {add=0; subs=0; loc=0} { add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }'
