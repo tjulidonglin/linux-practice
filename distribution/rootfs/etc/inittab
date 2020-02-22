@@ -1,0 +1,4 @@
+::sysinit:/etc/rcS
+tty1::askfirst:-/bin/sh --login
+tty2::askfirst:-/bin/sh --login
+tty3::askfirst:-/bin/sh --login

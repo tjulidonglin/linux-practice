@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cat <<EOF
+
+Welcome to  DIY 
+
+EOF
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin

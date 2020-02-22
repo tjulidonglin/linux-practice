@@ -1,0 +1,41 @@
+# Internet (IP) protocols
+#
+ip    0    IP
+icmp    1    ICMP
+igmp    2    IGMP
+ggp    3    GG
+ipencap    4    IP-ENCAP
+st    5    ST
+tcp    6    TCP
+egp    8    EGP
+igp    9    IGP
+pup    12    PUP
+udp    17    UDP
+hmp    20    HMP
+xns-idp    22    XNS-IDP
+rdp    27    RDP
+iso-tp4    29    ISO-TP4
+xtp    36    XTP
+ddp    37    DDP
+idpr-cmtp 38    IDPR-CMTP
+idrp    45    IDRP
+rsvp    46    RSVP
+gre    47    GRE
+esp    50    IPSEC-ESP
+ah    51    IPSEC-AH
+skip    57    SKIP
+rspf    73    RSPF CPHB
+vmtp    81    VMTP
+eigrp    88    EIGRP
+ospf    89    OSPFIGP
+ax.25    93    AX.25
+ipip    94    IPIP
+etherip    97    ETHERIP
+encap    98    ENCAP
+pim    103    PIM
+ipcomp    108    IPCOMP
+vrrp    112    VRRP
+l2tp    115    L2TP
+isis    124    ISIS
+sctp    132    SCTP
+fc    133    FC

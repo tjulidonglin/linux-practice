@@ -1,0 +1,20 @@
+#!/bin/sh
+
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+mount -t proc none /proc
+mount -t sysfs none /sys
+mount -t tmpfs tmpfs /dev -o size=512K,mode=0755
+echo DIY > /proc/sys/kernel/hostname
+
+mkdir -p /var/run /var/log /var/lock /var/state \
+         /var/tmp /var/mnt /dev/pts /dev/shm
+mount devpts /dev/pts -t devpts
+
+echo /bin/mdev > /proc/sys/kernel/hotplug
+mdev -s
+
+ifconfig lo 127.0.0.1 up
+ifconfig eth0 192.168.1.1 netmask 255.255.255.0 up
+
+telnetd -l /bin/sh
+httpd -h /www
