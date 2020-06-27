@@ -23,3 +23,6 @@ apt install -y net-tools
 
 # cscope
 apt install -y exuberant-ctags cscope
+
+#support exfat to access SSD
+apt install -y exfat-utils
