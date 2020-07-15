@@ -1,0 +1,19 @@
+1. 更新所有分支：
+git branch | awk 'BEGIN{print "echo ****Update all local branch...@daimon***"}{if($1=="*"){current=substr($0,3)};print a"git checkout "substr($0,3);print "git pull --all";}END{print "git checkout " current}' |sh
+2. 跟踪所有远程分支
+git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+3. 查询某段时间后代码合入记录
+git log --pretty="%cn - %cd - %h - %s" --since="2019-02-25"  --no-merges
+4. 获取年月日时分秒
+date +%Y%m%d%H%M%S
+5. 重新制作initrd文件
+find . | cpio -o -H newc --quiet | gzip -9 > ../${MINIOS_NAME}
+6. 统计代码量
+sum=0;for num in $(find . -name "*.c" -type f |xargs -n1 wc -l | awk '{print $1}');do sum=$(($sum+$num)); done
+7. 挂载内存文件系统
+mount -t tmpfs -o size=20G tmpfs /fast
+8. 提交代码
+git push origin HEAD:refs/for/UVP_KVM_3.0.RC2_PVC
+9. Qemu配置
+./configure --prefix=/usr --libdir=/usr/lib64 --sysconfdir=/etc --interp-prefix=/usr/qemu-%M --libexecdir=/usr/libexec --with-confsuffix=/qemu-kvm --target-list=x86_64-softmmu --localstatedir=/var '--extra-ldflags=-Wl,--build-id -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags,--rpath,/usr/lib64:/usr/lib -Wl,-z,noexecstack' '--extra-cflags=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -DPIE -fno-inline -fPIC -fvisibility=hidden -fstack-check' --disable-rdma --enable-kvm --enable-numa --disable-sdl --disable-spice --disable-smartcard --enable-linux-aio
+10. 
