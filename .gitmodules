@@ -4,3 +4,6 @@
 [submodule "libvirt"]
 	path = libvirt
 	url = git://libvirt.org/libvirt.git
+[submodule "linux"]
+	path = linux
+	url = git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
