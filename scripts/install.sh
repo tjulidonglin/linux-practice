@@ -28,4 +28,4 @@ apt install -y exuberant-ctags cscope
 apt install -y exfat-utils
 
 # performence tools
-apt install -y htop hwloc numactl
+apt install -y htop hwloc numactl stress sysbench lmbench sysstat
