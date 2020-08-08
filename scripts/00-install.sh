@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # compile qemu
-apt install -y gdb gcc g++ make autopoint pkgconf zlib1g-dev libsdl2-dev libglib2.0-dev libpixman-1-dev texinfo libusb-1.0-0-dev libspice-server-dev
+apt install -y gdb gcc g++ make autopoint pkgconf libnuma-dev libaio-dev zlib1g-dev libsdl2-dev libglib2.0-dev libpixman-1-dev texinfo libusb-1.0-0-dev libspice-server-dev
 
 # compile seabios
 apt install -y libncurses5-dev
