@@ -1,15 +1,18 @@
 #!/bin/bash
-sh ./00-install.sh
+#sh ./00-install.sh
+basedir=$(pwd)
 
 cd ../libvirt/
 git clean -fdx && git reset --hard
 git pull
-git checkout maint-3.2
+git checkout v3.2-maint
 if [ $? != 0 ]
 then
 	echo "Switch Libvirt-3.2 branch failed!"
 	exit 1
 fi
+##tar -xzf ${basedir}/gnulib.tar.gz -C ./
+sed -i '1047a#include <sys/uio.h>' src/util/virlog.c
 
 ./autobuild.sh
  ./configure --prefix=/usr --libdir=/usr/lib64 --sysconfdir=/etc --libexecdir=/usr/libexec --localstatedir=/var --bindir=/usr/bin --sbindir=/usr/sbin --datadir=/usr/share --includedir=/usr/include --mandir=/usr/share/man --with-qemu --without-xen --without-openvz --without-lxc --without-sasl  --with-polkit --without-uml --without-phyp --without-hyperv --without-vmware --without-xenapi --without-vz --without-bhyve --with-qemu
