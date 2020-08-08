@@ -14,6 +14,3 @@ sum=0;for num in $(find . -name "*.c" -type f |xargs -n1 wc -l | awk '{print $1}
 mount -t tmpfs -o size=20G tmpfs /fast
 8. 提交代码
 git push origin HEAD:refs/for/UVP_KVM_3.0.RC2_PVC
-9. Qemu配置
-./configure --prefix=/usr --libdir=/usr/lib64 --sysconfdir=/etc --interp-prefix=/usr/qemu-%M --libexecdir=/usr/libexec --with-confsuffix=/qemu-kvm --target-list=x86_64-softmmu --localstatedir=/var '--extra-ldflags=-Wl,--build-id -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags,--rpath,/usr/lib64:/usr/lib -Wl,-z,noexecstack' '--extra-cflags=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -DPIE -fno-inline -fPIC -fvisibility=hidden -fstack-check' --disable-rdma --enable-kvm --enable-numa --disable-sdl --disable-spice --disable-smartcard --enable-linux-aio
-10. 
