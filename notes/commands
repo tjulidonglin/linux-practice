@@ -14,3 +14,5 @@ sum=0;for num in $(find . -name "*.c" -type f |xargs -n1 wc -l | awk '{print $1}
 mount -t tmpfs -o size=20G tmpfs /fast
 8. 提交代码
 git push origin HEAD:refs/for/UVP_KVM_3.0.RC2_PVC
+9. centos系列配置阿里云yum源
+wget -O CentOS-Base.repo mirrors.aliyun.com/repo/Centos-6.repo
