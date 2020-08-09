@@ -6,3 +6,6 @@ yum install -y zlib-devel SDL-devel glib2-devel pixman-devel spice-server spice-
 #centos/redhat系统支持kernel开发的依赖包
 yum install kernel kernel-headers kernel-devel kernel-tools kernel-tools-libs -y
 
+#yum工具
+yum install yum-utils
+
