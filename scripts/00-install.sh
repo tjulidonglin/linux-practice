@@ -7,7 +7,10 @@ apt install -y gdb gcc g++ make autopoint pkgconf libnuma-dev libaio-dev zlib1g-
 apt install -y libncurses5-dev
 
 # compile libvirt
-apt install -y libtool autoconf libxml2-utils xsltproc libxml2-dev libpciaccess-dev libyajl-dev python3-pip libnl-3-dev libnl-route-3-dev libdevmapper-dev
+apt install -y libtool autoconf libxml2-utils xsltproc libxml2-dev
+libpciaccess-dev libyajl-dev python3-pip libnl-3-dev libnl-route-3-dev
+libdevmapper-dev lvm2 libaudit-dev libavahi-client-dev libfuse-dev libsasl2-dev
+perf-tools-unstable open-iscsi libparted-dev glusterfs-common
 
 # compile linux
 apt install -y libssl-dev dot2tex dvipng librsvg2-bin python3-sphinx libncurses5-dev
