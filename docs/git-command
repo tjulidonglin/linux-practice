@@ -10,3 +10,9 @@
   commitID开始到当前最新提交的补丁，不包含commitID对应的patch
 6. git format-patch commitID -n
   commitID开始往后n个补丁生成patch，包括commitID对应的patch
+7. git apply --stat  //检查patch修改哪些文件
+8. git apply --check  //检查patch是否可以打上
+9. git am --skip  //跳过有冲突的补丁
+10. git am --abort  //放弃打补丁
+11.git add --resolved //告诉git冲突已解决可以继续打patch
+
