@@ -6,3 +6,7 @@
   git log --format='%aN' | sort -u | while read name; do printf "%-30s" "$name"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %-8s removed lines: %-8s total lines: %-8s \n", add, subs, loc }' -; done
 4. 消除git diff时文件mode变化的假修改
   git config --add core.filemode false
+5. git format-patch commitID
+  commitID开始到当前最新提交的补丁，不包含commitID对应的patch
+6. git format-patch commitID -n
+  commitID开始往后n个补丁生成patch，包括commitID对应的patch
